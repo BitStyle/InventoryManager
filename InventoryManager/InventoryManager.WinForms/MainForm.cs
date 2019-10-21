@@ -15,6 +15,8 @@ namespace InventoryManager.WinForms
         public MainForm()
         {
             InitializeComponent();
+
+            InventoryManager.Data.
         }
     }
 }
