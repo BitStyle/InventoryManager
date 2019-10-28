@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel;
 
 namespace IntentoryManager.Data
 {
-    public class Item
+    public class Item : INotifyPropertyChanged
     {
-        public string MyProperty { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public string Name { get; set; }
     }
 }
