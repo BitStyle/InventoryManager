@@ -38,7 +38,6 @@
             this.playersTabPage = new System.Windows.Forms.TabPage();
             this.playerScoreTextBox = new System.Windows.Forms.TextBox();
             this.playersBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.worldBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.playerScoreLabel = new System.Windows.Forms.Label();
             this.playerHealthTextBox = new System.Windows.Forms.TextBox();
             this.playerHealthLabel = new System.Windows.Forms.Label();
@@ -49,18 +48,17 @@
             this.playersListBox = new System.Windows.Forms.ListBox();
             this.playersListView = new System.Windows.Forms.ListView();
             this.itemsTabPage = new System.Windows.Forms.TabPage();
+            this.itemNameTextBox = new System.Windows.Forms.TextBox();
+            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.itemNamelabel = new System.Windows.Forms.Label();
             this.deleteItemButton = new System.Windows.Forms.Button();
             this.addItemButton = new System.Windows.Forms.Button();
             this.itemsListBox = new System.Windows.Forms.ListBox();
-            this.itemsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.itemsListView = new System.Windows.Forms.ListView();
-            this.itemNameTextBox = new System.Windows.Forms.TextBox();
-            this.itemNamelabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.worldViewModelBindingSource)).BeginInit();
             this.mainTabControl.SuspendLayout();
             this.playersTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.playersBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).BeginInit();
             this.itemsTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -142,12 +140,7 @@
             // playersBindingSource
             // 
             this.playersBindingSource.DataMember = "Players";
-            this.playersBindingSource.DataSource = this.worldBindingSource;
-            // 
-            // worldBindingSource
-            // 
-            this.worldBindingSource.DataMember = "World";
-            this.worldBindingSource.DataSource = this.worldViewModelBindingSource;
+            this.playersBindingSource.DataSource = this.worldViewModelBindingSource;
             // 
             // playerScoreLabel
             // 
@@ -202,6 +195,7 @@
             this.deletePlayerButton.TabIndex = 3;
             this.deletePlayerButton.Text = "&Delete";
             this.deletePlayerButton.UseVisualStyleBackColor = true;
+            this.deletePlayerButton.Click += new System.EventHandler(this.DeletePlayerButton_Click);
             // 
             // addPlayerButton
             // 
@@ -211,6 +205,7 @@
             this.addPlayerButton.TabIndex = 2;
             this.addPlayerButton.Text = "&Add...";
             this.addPlayerButton.UseVisualStyleBackColor = true;
+            this.addPlayerButton.Click += new System.EventHandler(this.AddPlayerButton_Click);
             // 
             // playersListBox
             // 
@@ -222,6 +217,7 @@
             this.playersListBox.Size = new System.Drawing.Size(197, 316);
             this.playersListBox.TabIndex = 1;
             this.playersListBox.ValueMember = "Health";
+            this.playersListBox.SelectedIndexChanged += new System.EventHandler(this.PlayersListBox_SelectedIndexChanged);
             // 
             // playersListView
             // 
@@ -246,6 +242,28 @@
             this.itemsTabPage.TabIndex = 1;
             this.itemsTabPage.Text = "Items";
             this.itemsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // itemNameTextBox
+            // 
+            this.itemNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.itemsBindingSource, "Name", true));
+            this.itemNameTextBox.Location = new System.Drawing.Point(206, 20);
+            this.itemNameTextBox.Name = "itemNameTextBox";
+            this.itemNameTextBox.Size = new System.Drawing.Size(160, 20);
+            this.itemNameTextBox.TabIndex = 9;
+            // 
+            // itemsBindingSource
+            // 
+            this.itemsBindingSource.DataMember = "Items";
+            this.itemsBindingSource.DataSource = this.worldViewModelBindingSource;
+            // 
+            // itemNamelabel
+            // 
+            this.itemNamelabel.AutoSize = true;
+            this.itemNamelabel.Location = new System.Drawing.Point(203, 3);
+            this.itemNamelabel.Name = "itemNamelabel";
+            this.itemNamelabel.Size = new System.Drawing.Size(38, 13);
+            this.itemNamelabel.TabIndex = 8;
+            this.itemNamelabel.Text = "&Name:";
             // 
             // deleteItemButton
             // 
@@ -274,12 +292,7 @@
             this.itemsListBox.Name = "itemsListBox";
             this.itemsListBox.Size = new System.Drawing.Size(197, 316);
             this.itemsListBox.TabIndex = 5;
-            this.itemsListBox.ValueMember = "Health";
-            // 
-            // itemsBindingSource
-            // 
-            this.itemsBindingSource.DataMember = "Items";
-            this.itemsBindingSource.DataSource = this.worldBindingSource;
+            this.itemsListBox.ValueMember = "Name";
             // 
             // itemsListView
             // 
@@ -288,23 +301,6 @@
             this.itemsListView.Size = new System.Drawing.Size(197, 351);
             this.itemsListView.TabIndex = 4;
             this.itemsListView.UseCompatibleStateImageBehavior = false;
-            // 
-            // itemNameTextBox
-            // 
-            this.itemNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.itemsBindingSource, "Name", true));
-            this.itemNameTextBox.Location = new System.Drawing.Point(206, 20);
-            this.itemNameTextBox.Name = "itemNameTextBox";
-            this.itemNameTextBox.Size = new System.Drawing.Size(160, 20);
-            this.itemNameTextBox.TabIndex = 9;
-            // 
-            // itemNamelabel
-            // 
-            this.itemNamelabel.AutoSize = true;
-            this.itemNamelabel.Location = new System.Drawing.Point(203, 3);
-            this.itemNamelabel.Name = "itemNamelabel";
-            this.itemNamelabel.Size = new System.Drawing.Size(38, 13);
-            this.itemNamelabel.TabIndex = 8;
-            this.itemNamelabel.Text = "&Name:";
             // 
             // MainForm
             // 
@@ -324,7 +320,6 @@
             this.playersTabPage.ResumeLayout(false);
             this.playersTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.playersBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.worldBindingSource)).EndInit();
             this.itemsTabPage.ResumeLayout(false);
             this.itemsTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemsBindingSource)).EndInit();
@@ -345,14 +340,11 @@
         private System.Windows.Forms.Button deletePlayerButton;
         private System.Windows.Forms.Button addPlayerButton;
         private System.Windows.Forms.ListBox playersListBox;
-        private System.Windows.Forms.BindingSource playersBindingSource;
-        private System.Windows.Forms.BindingSource worldBindingSource;
         private System.Windows.Forms.ListView playersListView;
         private System.Windows.Forms.TabPage itemsTabPage;
         private System.Windows.Forms.Button deleteItemButton;
         private System.Windows.Forms.Button addItemButton;
         private System.Windows.Forms.ListBox itemsListBox;
-        private System.Windows.Forms.BindingSource itemsBindingSource;
         private System.Windows.Forms.ListView itemsListView;
         private System.Windows.Forms.TextBox playerNameTextBox;
         private System.Windows.Forms.Label playerNameLabel;
@@ -362,6 +354,8 @@
         private System.Windows.Forms.Label playerScoreLabel;
         private System.Windows.Forms.TextBox itemNameTextBox;
         private System.Windows.Forms.Label itemNamelabel;
+        private System.Windows.Forms.BindingSource playersBindingSource;
+        private System.Windows.Forms.BindingSource itemsBindingSource;
     }
 }
 

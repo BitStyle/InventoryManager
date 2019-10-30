@@ -21,7 +21,7 @@ namespace InventoryManager.WinForms
             get => mViewModel;
             set
             {
-                if(mViewModel != value)
+                if (mViewModel != value)
                 {
                     mViewModel = value;
                     worldViewModelBindingSource.DataSource = mViewModel;
@@ -29,22 +29,35 @@ namespace InventoryManager.WinForms
             }
         }
 
+        private bool IsWorldLoaded
+        {
+            get => mIsWorldLoaded;
+            set
+            {
+                mIsWorldLoaded = value;
+                mainTabControl.Enabled = mIsWorldLoaded;
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();
             ViewModel = new WorldViewModel();
+            IsWorldLoaded = false;
         }
 
         private void SelectFileButton_Click(object sender, EventArgs e)
         {
-            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 ViewModel.World = JsonConvert.DeserializeObject<World>(File.ReadAllText(openFileDialog.FileName));
                 ViewModel.Filename = openFileDialog.FileName;
+                IsWorldLoaded = true;
             }
         }
 
         private WorldViewModel mViewModel;
+        private bool mIsWorldLoaded;
 
         private void Label1_Click(object sender, EventArgs e)
         {
@@ -54,6 +67,28 @@ namespace InventoryManager.WinForms
         private void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void AddPlayerButton_Click(object sender, EventArgs e)
+        {
+            using (AddPlayerForm addPlayerForm = new AddPlayerForm())
+            {
+                if (addPlayerForm.ShowDialog() == DialogResult.OK)
+                {
+                    //TODO
+                    Player player = new Player { Name = addPlayerForm.PlayerName };
+                    ViewModel.Players.Add(player);
+                }
+            }
+        }
+
+        private void PlayersListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            deletePlayerButton.Enabled = playersListBox.SelectedItem != null;
+        }
+
+        private void DeletePlayerButton_Click(object sender, EventArgs e)
+        {
         }
     }
 }

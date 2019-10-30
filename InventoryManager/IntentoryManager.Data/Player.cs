@@ -11,5 +11,10 @@ namespace IntentoryManager.Data
         public int Health { get; set; }
         public int Score { get; set; }
         public List<Item> Inventory { get; set; }
+        
+        public Player()
+        {
+            Inventory = new List<Item>();
+        }
     }
 }

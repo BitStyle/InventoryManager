@@ -8,5 +8,11 @@ namespace IntentoryManager.Data
     {
         public List<Player> Players { get; set; }
         public List<Item> Items { get; set; }
+
+        public World()
+        {
+            Players = new List<Player>();
+            Items = new List<Item>();
+        }
     }
 }
