@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using IntentoryManager.Data;
 using System.IO;
+using System.Reflection;
 using InventoryManager.WinForms.ViewModels;
 
 namespace InventoryManager.WinForms
 {
     public partial class MainForm : Form
     {
+        public static string AssemblyTitle = Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>()?.Title;
         private WorldViewModel ViewModel
         {
             get => mViewModel;
@@ -89,6 +91,11 @@ namespace InventoryManager.WinForms
 
         private void DeletePlayerButton_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show("Delete this player?", AssemblyTitle, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                ViewModel.Players.Remove((Player)playersListBox.SelectedItem);
+                playersListBox.SelectedItem = ViewModel.Players.FirstOrDefault();
+            }
         }
     }
 }
