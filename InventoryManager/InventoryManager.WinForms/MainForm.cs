@@ -50,12 +50,7 @@ namespace InventoryManager.WinForms
 
         private void SelectFileButton_Click(object sender, EventArgs e)
         {
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                ViewModel.World = JsonConvert.DeserializeObject<World>(File.ReadAllText(openFileDialog.FileName));
-                ViewModel.Filename = openFileDialog.FileName;
-                IsWorldLoaded = true;
-            }
+          
         }
 
         private WorldViewModel mViewModel;
@@ -96,6 +91,35 @@ namespace InventoryManager.WinForms
                 ViewModel.Players.Remove((Player)playersListBox.SelectedItem);
                 playersListBox.SelectedItem = ViewModel.Players.FirstOrDefault();
             }
+        }
+
+        #region Menu Tools
+        private void OpenWorldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ViewModel.World = JsonConvert.DeserializeObject<World>(File.ReadAllText(openFileDialog.FileName));
+                ViewModel.Filename = openFileDialog.FileName;
+                IsWorldLoaded = true;
+            }
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e) => SaveWorld();
+        #endregion
+
+        private void SaveWorld()
+        {
+
         }
     }
 }
