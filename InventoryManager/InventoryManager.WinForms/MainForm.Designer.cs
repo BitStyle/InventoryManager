@@ -109,7 +109,7 @@
             // 
             // playerScoreTextBox
             // 
-            this.playerScoreTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playersBindingSource, "Score", true));
+            this.playerScoreTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playersBindingSource, "Score", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.playerScoreTextBox.Location = new System.Drawing.Point(206, 102);
             this.playerScoreTextBox.Name = "playerScoreTextBox";
             this.playerScoreTextBox.Size = new System.Drawing.Size(73, 20);
@@ -131,7 +131,7 @@
             // 
             // playerHealthTextBox
             // 
-            this.playerHealthTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playersBindingSource, "Health", true));
+            this.playerHealthTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playersBindingSource, "Health", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.playerHealthTextBox.Location = new System.Drawing.Point(206, 60);
             this.playerHealthTextBox.Name = "playerHealthTextBox";
             this.playerHealthTextBox.Size = new System.Drawing.Size(73, 20);
@@ -150,7 +150,7 @@
             // 
             // playerNameTextBox
             // 
-            this.playerNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playersBindingSource, "Name", true));
+            this.playerNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.playersBindingSource, "Name", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.playerNameTextBox.Location = new System.Drawing.Point(206, 20);
             this.playerNameTextBox.Name = "playerNameTextBox";
             this.playerNameTextBox.Size = new System.Drawing.Size(160, 20);
@@ -199,6 +199,7 @@
             // 
             // playersListView
             // 
+            this.playersListView.HideSelection = false;
             this.playersListView.Location = new System.Drawing.Point(0, 3);
             this.playersListView.Name = "playersListView";
             this.playersListView.Size = new System.Drawing.Size(197, 351);
@@ -274,6 +275,7 @@
             // 
             // itemsListView
             // 
+            this.itemsListView.HideSelection = false;
             this.itemsListView.Location = new System.Drawing.Point(0, 3);
             this.itemsListView.Name = "itemsListView";
             this.itemsListView.Size = new System.Drawing.Size(197, 351);

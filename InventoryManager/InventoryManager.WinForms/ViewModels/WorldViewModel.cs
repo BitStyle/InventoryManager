@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using IntentoryManager.Data;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace InventoryManager.WinForms.ViewModels
 {
@@ -40,6 +42,24 @@ namespace InventoryManager.WinForms.ViewModels
         public WorldViewModel(World world = null)
         {
             World = world;
+        }
+
+        public void SaveWorld()
+        {
+            if (string.IsNullOrEmpty(Filename))
+            {
+                throw new InvalidProgramException("Filename expected.");
+            }
+
+            JsonSerializer serializer = new JsonSerializer
+            {
+                Formatting = Formatting.Indented
+            };
+            using (StreamWriter streamWriter = new StreamWriter(Filename))
+            using (JsonWriter jsonWriter = new JsonTextWriter(streamWriter))
+            {
+                serializer.Serialize(jsonWriter, mWorld);
+            }
         }
 
         private World mWorld;

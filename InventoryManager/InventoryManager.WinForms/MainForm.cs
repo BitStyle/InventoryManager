@@ -106,7 +106,11 @@ namespace InventoryManager.WinForms
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            if(saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                ViewModel.Filename = saveFileDialog.FileName;
+                ViewModel.SaveWorld();
+            }
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,12 +118,8 @@ namespace InventoryManager.WinForms
             Close();
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e) => SaveWorld();
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e) => ViewModel.SaveWorld();
         #endregion
 
-        private void SaveWorld()
-        {
-
-        }
     }
 }
